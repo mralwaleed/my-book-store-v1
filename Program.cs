@@ -1,11 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using FluentValidation;
+using System.Text.RegularExpressions;
+using FluentValidation.Results;
+using my_book_store_v1.Data.Models;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+builder.Services.AddDbContext<AppDBContext>(opt => opt.UseSqlServer("Data Source=TS4008\\SQLEXPRESS;Initial Catalog=BooksDB;Integrated Security=True"));
+// builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
